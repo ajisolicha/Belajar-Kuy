@@ -1,0 +1,170 @@
+#include "mainwindow.h"
+saranghaeeeeeeeeeee
+
+#include <QWidget>
+#include <QString>
+include <QPixmap>
+
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    QPixmap pix ("C:/Users/User/Documents/pengolahangambar/doraemon.jpg");
+    ui->label->setPixmap(pix);
+    QPixmap pix1 ("C:/Users/User/Documents/pengolahangambar/doraemon.jpg");
+    ui->label_3->setPixmap(pix1);
+
+}
+
+MainWindow::~MainWindow()
+{
+//   delete();
+,,,,,,,,,,,,,,,}
+
+void MainWindow::changeEvent(QEvent *e)
+{
+ //   QMainWindow::changeEvent(e);
+ //   switch (e->type()){
+ //   case QEvent::LanguageChange:
+ //       ui->retranslateUi(this);
+ //       break;
+ //   default:
+//        break;
+
+    }
+}
+int MainWindow::baris;
+int MainWindow::kolom;
+int MainWindow::warna_count[0][0];
+QImage MainWindow::imagenew1;
+QImage MainWindow::imagenew11;
+
+void MainWindow::on_pushButton_clicked()
+{
+    // buka gambar dar file
+     QFileDialog percakapan(this);
+       percakapan.setNameFilter(tr("Images(*.png *.xpm *.jpg)"));
+       percakapan.setViewMode(QFileDialog::Detail);
+       QString nama = QFileDialog :: getOpenFileName(this,
+                        tr("Open Images"),"", tr("Images Files (*.png *.jpg *.bmp)"));
+       if (!nama.isEmpty())
+       {
+           QImage image (nama);
+           //QImage imagenew= image.convertToFormat(QImage::Format_Indexed8,Qt::AutoColor);
+           imagenew1= image.convertToFormat(QImage::Format_Indexed8,Qt::AutoColor);
+           baris= imagenew1.height();
+           kolom= imagenew1.width();
+           ui->label->setPixmap(QPixmap::fromImage(image));
+
+       }
+
+}
+void MainWindow::on_pushButton_2_clicked()
+{
+    // buka gambar dar file
+     QFileDialog percakapan1(this);
+       percakapan1.setNameFilter(tr("Images(*.png *.xpm *.jpg)"));
+       percakapan1.setViewMode(QFileDialog::Detail);
+       QString nama1 = QFileDialog :: getOpenFileName(this,
+                        tr("Open Images"),"", tr("Images Files (*.png *.jpg *.bmp)"));
+       if (!nama1.isEmpty())
+       {
+           QImage image1 (nama1);
+           //QImage imagenew10= image1.convertToFormat(QImage::Format_Indexed8, Qt::AutoColor);
+           imagenew11=image1.convertToFormat(QImage::Format_Indexed8,Qt::AutoColor);
+            ui->label_3->setPixmap(QPixmap::fromImage(image1));
+
+
+       }
+
+
+
+
+
+}
+
+
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    QImage file= imagenew1.convertToFormat(QImage::Format_Indexed8,Qt::AutoColor);
+    QImage file1= imagenew11.convertToFormat(QImage::Format_Indexed8, Qt::AutoColor);
+    //file1= file1.scaled(baris, kolom, Qt::KeepAspectRatio);
+    QImage gambar1 (imagenew1.height(),imagenew11.width(),QImage::Format_Indexed8);
+    QPixmap gambarnew1;
+    gambarnew1= QPixmap::fromImage(imagenew1);
+    gambar1= gambarnew1.toImage();
+
+// OPSI1
+//    for (int row=1;row<file.height();++row){
+  //      for(int col=1; col<file.width();++col){
+    //       if(row<100){
+      //      //SISIP versi 1
+      //      // gambar harus pilih
+       //    int pixel1    = file.pixelIndex(col,row);
+       //  QRgb pixelcol1= file.color(pixel1);
+       //   int red1      = qRed(pixelcol1);
+       //   int green1    = qGreen(pixelcol1);
+       //   int blue1     = qBlue(pixelcol1);
+       //   int warna    = qRgb(red1,green1,blue1);
+            //int warna1=warna_count[col][row];
+       //     QColor dcolor1(warna);
+       //     dcolor1.setAlpha(file.pixelColor(col,row).alpha());
+       //    gambar1.setPixelColor(col,row,dcolor1);
+        //     }
+         //  else{
+          //            int pixel= file1.pixelIndex(col,row);
+          //             QRgb pixelcol= file1.color(pixel);
+          //             int red= qRed(pixelcol);
+          //             int green= qGreen(pixelcol);
+          //             int blue = qBlue(pixelcol);
+          //             int warna1=  qRgb(red,green,blue);
+          //             QColor dcolor(warna1);
+          //             dcolor.setAlpha(file1.pixelColor(col,row).alpha());
+          //             gambar1.setPixelColor(col,row,dcolor);
+          // }
+
+       // }
+   // }
+
+    // opsi dua
+   // for (int row=1;row<=100;row++){
+   //     for (int col=500; col<=600;col++){
+   //         int pixel= file1.pixelIndex(col,row);
+   //          QRgb pixelcol= file1.color(pixel);
+   //          int red= qRed(pixelcol);
+   //          int green= qGreen(pixelcol);
+   //          int blue = qBlue(pixelcol);
+   //          int warna1=  qRgb(red,green,blue);
+   //          QColor dcolor(warna1);
+   //          dcolor.setAlpha(file1.pixelColor(col,row).alpha());
+   //          gambar1.setPixelColor(col,row,dcolor);
+     //   }
+   // }
+
+// OPSI 3
+    for (int row=500;row<=599;row++){
+        int row1= (row-500)+1;
+        for (int col=500; col<=599;col++){
+            int col1= (col-500)+1;
+            int pixel= file1.pixelIndex(col1,row1);
+             QRgb pixelcol= file1.color(pixel);
+             int red= qRed(pixelcol);
+             int green= qGreen(pixelcol);
+             int blue = qBlue(pixelcol);
+             int warna1=  qRgb(red,green,blue);
+             QColor dcolor(warna1);
+             dcolor.setAlpha(file1.pixelColor(col1,row1).alpha());
+             gambar1.setPixelColor(col,row,dcolor);
+
+        }
+    }
+QImage Gambarjadi;
+Gambarjadi= gambar1.convertToFormat(QImage::Format_Indexed8,Qt::AutoColor);
+ ui->label_5->setPixmap(QPixmap::fromImage(Gambarjadi));
+ ui->label_5->show();
+ gambar1.save("imagenyar.png");
+
+}
